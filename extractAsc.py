@@ -37,7 +37,7 @@ def extractASCFile(filename, outfile = 'output.json'):
     #loop through lines and record the data
     for line in asclines:
         if '.sym' in line:
-            processSymData(line, symdata)
+            symdata.append(line.strip())
             continue
         if '.comment' in line:
             comments.append(line)
@@ -60,7 +60,7 @@ def extractASCFile(filename, outfile = 'output.json'):
             tempdata['bitstream'] = []
         else:
             tempdata['bitstream'].append(line.strip())
-    jsondata = {'tiledata': tiledata, 'symdata':symdata, 'tile_types':tile_types}
+    jsondata = {'tiledata': tiledata, 'symdata':symdata, 'tile_types':tile_types, 'device': device}
     with open(outfile, 'w+') as ofile:
         json.dump(jsondata, ofile)
     reformat_json(outfile)
