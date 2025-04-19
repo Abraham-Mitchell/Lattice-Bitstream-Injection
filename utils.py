@@ -1,3 +1,5 @@
+import json
+
 def reformat_json(file_path, indent=4):
     """Reads a JSON file, reformats it with proper indentation, and overwrites it."""
     try:
