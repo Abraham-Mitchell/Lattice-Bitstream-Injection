@@ -1,6 +1,12 @@
 # Lattice Bitstream Injection Guide
 
-This guide walks through the process of synthesizing, placing-and-routing, converting, and programming a bitstream for the iCE40 FPGA using open-source tools.
+Install guide for the required tools (Yosys, nextpnr, all the IceStorm tools) can be found here: https://prjicestorm.readthedocs.io/en/latest/overview.html#what-is-project-icestorm
+
+I did this on an Ubuntu VM. I ran into some problems during the install. If that happens, IDK just ask chatgpt.
+
+One problem I do know how to (possibly) solve is if on VirtualBox VM the usb can't be recognized. With the Lattice board plugged in, go to Settings -> USB -> enable USB controller -> select USB 2.0 controller -> add new USB filter with all fields... -> Ok
+
+Below are the instructions I used to flash blinky.v into the board. If everything works correctly you will see the LED loop through colors. 
 
 ---
 
