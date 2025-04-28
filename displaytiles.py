@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import json
+import sys
 
 dark_colors = ['#1b1f3b', '#2e3a1f', '#3a1f2e', '#2f1f1f', '#1f2f2f', '#1f1f2f',
                '#2a2f1f', '#1f2f1f', '#2f1f2a', '#1f1f1f', '#2e1f1b', '#1b2e1f']
@@ -8,7 +9,7 @@ dark_colors = ['#1b1f3b', '#2e3a1f', '#3a1f2e', '#2f1f1f', '#1f2f2f', '#1f1f2f',
 light_colors = ['#4c5a9d', '#7aa235', '#c061a0', '#e85a5a', '#5ad3d1', '#5a5ae8',
                  '#bcd35a', '#61e85a', '#e85ac2', '#bbbbbb', '#dd845a', '#5ae884']
 
-def draw_colored_grid(tile_instructions):
+def draw_colored_grid(tile_instructions, imgname:str = 'fpga.png'):
     """
     Draws a grid where specific tiles are colored individually.
 
@@ -43,8 +44,8 @@ def draw_colored_grid(tile_instructions):
     plt.xlabel("X")
     plt.ylabel("Y")
     # plt.show()
-    plt.savefig('fpga.png')
-    print('finished drawing')
+    plt.savefig(imgname)
+    print('finished drawing to ', imgname)
 
 def assignColors(tile_types:list) -> dict:
     color = {}
@@ -54,7 +55,7 @@ def assignColors(tile_types:list) -> dict:
     return color
         
     
-def drawFPGATiles(data):
+def drawFPGATiles(data, imgname:str):
     colors = assignColors(data['tile_types'])
     todraw = []
     for tile in data['usedtiles']:
@@ -74,7 +75,12 @@ def drawFPGATiles(data):
     draw_colored_grid(todraw)
 # Example usage:
 if __name__ == "__main__":
-    jsondata = json.load(open('output1.json'))
+    if len(sys.argv) < 2:
+        raise ValueError("not enough arguments")
+    img = 'fpga.png'
+    if len(sys.argv) >= 3:
+        img = sys.argv[2]
+    jsondata = json.load(open(sys.argv[1]), img)
     drawFPGATiles(jsondata)
 
 

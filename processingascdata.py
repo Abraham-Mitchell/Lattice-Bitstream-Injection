@@ -54,8 +54,11 @@ def identifyUsediles(data: dict, jsonoutput = None):
         reformat_json(jsonoutput)
     return usedtiles, unusedtiles
 
+
 if __name__ == '__main__':
-    jsondata = json.load(open('output.json'))
-    ret = identifyUsediles(jsondata, 'output1.json')
-    print('used: ',ret[0])
-    print('unused: ', ret[1])
+    if len(sys.argv)<3:
+        raise ValueError("not enough arguments")
+    jsondata = json.load(open(sys.argv[1]))
+    ret = identifyUsediles(jsondata, sys.argv[2])
+    # print('used: ',ret[0])
+    # print('unused: ', ret[1])
