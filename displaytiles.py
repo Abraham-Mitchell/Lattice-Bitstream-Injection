@@ -72,15 +72,15 @@ def drawFPGATiles(data, imgname:str):
             tile_type = tile['tiletype']
             color = colors[tile_type]['unused']
             todraw.append((x,y,color))
-    draw_colored_grid(todraw)
-# Example usage:
+    draw_colored_grid(todraw, imgname=imgname)
+
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         raise ValueError("not enough arguments")
     img = 'fpga.png'
     if len(sys.argv) >= 3:
         img = sys.argv[2]
-    jsondata = json.load(open(sys.argv[1]), img)
-    drawFPGATiles(jsondata)
+    jsondata = json.load(open(sys.argv[1]))
+    drawFPGATiles(jsondata, imgname=img)
 
 
